@@ -1,7 +1,7 @@
 module Feeder
   
   
-  class Feeder
+  class Feed
     
     attr_reader :id
     

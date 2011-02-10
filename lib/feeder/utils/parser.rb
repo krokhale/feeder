@@ -3,7 +3,7 @@ module Feeder
   class Parser
     
     def initialize
-      @feeds = []
+      @feeds ||= []
     end
     
     def parse
@@ -25,6 +25,7 @@ module Feeder
       feed.entries.each do |entry|
         Post.create(:title => entry.title.sanitize, :url => entry.url, :date => entry.published,
          :text => entry.content.sanitize, :feed_id => id)
+         puts "#{entry.title.sanitize}  : Post Created!" 
       end
     end 
     
