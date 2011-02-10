@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20110210003556) do
 
   create_table "posts", :force => true do |t|
     t.string   "title"
-    t.datetime "date"
+    t.time     "date"
     t.string   "text"
     t.string   "url"
     t.integer  "feed_id"

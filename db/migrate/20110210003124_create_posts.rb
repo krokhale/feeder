@@ -2,7 +2,7 @@ class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
       t.string :title
-      t.datetime :date
+      t.time :date
       t.string :text
       t.string :url
       t.integer :feed_id
