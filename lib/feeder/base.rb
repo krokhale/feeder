@@ -1,3 +1,10 @@
+$:.unshift(File.dirname(__FILE__))
+
+require 'feedzirra'
+require 'utils/mailer'
+require 'utils/parser'
+
+
 module Feeder
   
   
@@ -13,8 +20,8 @@ module Feeder
     end
     
     def parse!
-      parser = Parser.new
-      parser.parse
+      @parser = Parser.new
+      @parser.parse
     end
     
     def mail!
