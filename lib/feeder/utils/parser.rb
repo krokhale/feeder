@@ -29,7 +29,8 @@ module Feeder
       sources 
     end
     
-    
+    # ensures that only feeds that require updating are updated and corresponding posts
+    # created accordingly in the methods below, genius!!!
     def sources
       @current_feeds.empty? ? Feed.all : ( @toggle ? Feed.all.select{|feed| @queue.include?(feed.id) } : [])
     end
