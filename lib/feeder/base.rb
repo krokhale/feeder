@@ -19,14 +19,15 @@ module Feeder
       @@counter = @@counter + 1
     end
     
+    # perform is standard method for resque
     def parse!
       @parser = Parser.new
-      @parser.parse
+      @parser.perform
     end
     
     def mail!
       mailer = Mailer.new
-      mailer.mail
+      mailer.perform
     end
     
   end
