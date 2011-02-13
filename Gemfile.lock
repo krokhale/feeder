@@ -97,6 +97,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mail
   pauldix-feedzirra
   rails (= 3.0.3)
   resque

@@ -1,6 +1,8 @@
 $:.unshift(File.dirname(__FILE__))
 
 require 'feedzirra'
+require 'base64'
+require 'mail'
 require 'utils/mailer'
 require 'utils/parser'
 
@@ -12,22 +14,15 @@ module Feeder
         
     @queue = :master
     
-    
-    def self.perform(current_feeds,queue,toggle)
-        parser = Parser.new(current_feeds,queue,toggle)
+    def self.perform(*args)
+      if defined?(feed_id)
+        mailer = Mailer.new(feed_id)
+        mailer.async
+      else
+        parser = Parser.new
         parser.perform
-        parser.async(parser.current_feeds,parser.queue,parser.toggle)
-    end
-    
-    # perform is standard method for resque
-    def parse!
-      @parser = Parser.new
-      @parser.perform
-    end
-    
-    def mail!
-      mailer = Mailer.new
-      mailer.perform
+        parser.async
+      end
     end
     
   end

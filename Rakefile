@@ -3,7 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
-require '/Users/krishnarokhale/code/feeder/lib/feeder/base.rb'
 require 'resque/tasks'
 
 Feeder::Application.load_tasks
