@@ -9,14 +9,14 @@ module Feeder
   
   
   class Worker
+        
+    @queue = :master
     
-    attr_reader :id
     
-    @@counter = 1
-    
-    def initialize
-      @id = @@counter
-      @@counter = @@counter + 1
+    def self.perform(current_feeds,queue,toggle)
+        parser = Parser.new(current_feeds,queue,toggle)
+        parser.perform
+        parser.async(parser.current_feeds,parser.queue,parser.toggle)
     end
     
     # perform is standard method for resque

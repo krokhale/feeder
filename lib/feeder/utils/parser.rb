@@ -1,11 +1,13 @@
 module Feeder
   
   class Parser
+    
+    attr_accessor :current_feeds, :queue, :toggle
             
-    def initialize
-      @current_feeds ||= {}
-      @queue ||= []
-      @toggle = false
+    def initialize(current_feeds,queue,toggle)
+      @current_feeds ||= current_feeds
+      @queue ||= queue
+      @toggle ||= toggle
     end
     
     # this would be used as a hook to resque later on. a method in mailer would be called here later, when feeds are found to have updates.
@@ -14,7 +16,12 @@ module Feeder
       @current_feeds.each do |feed_id, feed|
         @queue << feed_id if Feedzirra::Feed.update(feed).updated?
       end
+      puts "i was here!"
       parse    
+    end
+    
+    def async(current_feeds,queue,toggle)
+        Resque.enqueue(Worker,current_feeds,queue,toggle)
     end
     
     
